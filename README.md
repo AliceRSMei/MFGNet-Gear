@@ -87,8 +87,10 @@ If you use this dataset, please cite:
 }
 ```
 
-> A dataset descriptor paper is under review at IEEE Data Descriptions. 
+> A dataset descriptor paper is under preparation. 
 > Citation will be updated upon publication.
+```
+```
 
 ## License
 
@@ -97,6 +99,6 @@ The dataset is licensed under CC BY 4.0.
 
 ## Contact
 
-Ruo-Syuan Mei — [your email]  
+Ruo-Syuan Mei — rsmei@umich.edu  
 Chenhui Shao — chshao@umich.edu  
 Department of Mechanical Engineering, University of Michigan
