@@ -72,6 +72,12 @@ snapshot_download(repo_id="YOUR_HF_REPO", repo_type="dataset")
 
 ## Related Publication
 
+A dataset descriptor paper is under preparation. 
+```
+Citation will be updated upon publication.
+```
+
+
 If you use this dataset, please cite:
 
 ```bibtex
@@ -87,10 +93,7 @@ If you use this dataset, please cite:
 }
 ```
 
-A dataset descriptor paper is under preparation. 
-```
-Citation will be updated upon publication.
-```
+
 
 ## License
 
@@ -99,5 +102,5 @@ The dataset is licensed under CC BY 4.0.
 
 ## Contact
 
-Ruo-Syuan Mei — rsmei@umich.edu  
+Alice Mei — rsmei@umich.edu  
 
