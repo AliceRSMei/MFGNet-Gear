@@ -6,7 +6,7 @@ A Synthetic 3D Point Cloud Dataset for Geometric Defect Detection in Gears
 [![Dataset on HuggingFace](https://img.shields.io/badge/Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/YOUR_HF_REPO)
 
 This repository contains the data generation code and metadata for the **MFGNet-Gear** dataset, 
-a synthetic 3D point cloud benchmark dataset for geometric defect detection in gear manufacturing.
+a synthetic 3D point cloud benchmark dataset for geometric defect detection in gears.
 
 ## Dataset Overview
 
@@ -36,6 +36,7 @@ See `metadata/design_table.csv` for full specifications.
 | HuggingFace | Full dataset (24,000 parts, ~168 GB) | YOUR_HF_LINK |
 
 ## Repository Structure
+```
 mfgnet-gear/
 data_generation/
 solidworks/       ← Design tables and SolidWorks macros
@@ -46,7 +47,7 @@ design_table.csv
 defect_parameters_randomized.csv
 defect_parameters_fixed.csv
 README.md
-
+```
 
 ## Quick Start
 
