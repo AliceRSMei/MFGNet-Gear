@@ -43,7 +43,7 @@ Full design parameters are in `metadata/design_table.csv`.
 ## File Naming Convention
 
 All files follow the pattern `{DesignID}{QualityClass}_{NNNNN}.{ext}`:
-T20ID10G0_00001.ply   → design T20ID10, good part, index 1, mesh \n
+T20ID10G0_00001.ply   → design T20ID10, good part, index 1, mesh
 T20ID10G0_00001.txt   → same part, point cloud format
 T30ID30R0_00412.txt   → design T30ID30, root breakage, index 412
 
@@ -84,14 +84,14 @@ snapshot_download(repo_id="YOUR_HF_REPO", repo_type="dataset")
 If you use MFGNet-Gear, please cite both the dataset descriptor and the original paper:
 
 ```bibtex
-@article{mei2024mfgnet,
-  title={Deep Learning of 3D Point Clouds for Detecting Geometric Defects in Gears},
-  author={Mei, Ruo-Syuan and Conway, Christopher H. and Bimrose, Miles V.
-          and King, William P. and Shao, Chenhui},
+@article{mei2024deep,
+  title={Deep learning of 3D point clouds for detecting geometric defects in gears},
+  author={Mei, Ruo-Syuan and Conway, Christopher H and Bimrose, Miles V and King, William P and Shao, Chenhui},
   journal={Manufacturing Letters},
   volume={41},
   pages={1324--1333},
-  year={2024}
+  year={2024},
+  publisher={Elsevier}
 }
 
 More publications coming up...
