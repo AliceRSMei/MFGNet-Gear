@@ -6,7 +6,7 @@
 [![Paper](https://img.shields.io/badge/Paper-Manufacturing%20Letters%202024-green)](https://doi.org/10.1016/j.mfglet.2024.09.159)
 
 This repository contains the data generation code and metadata for **MFGNet-Gear**,
-a synthetic 3D benchmark dataset for geometric defect detection in gear manufacturing.
+a synthetic 3D benchmark dataset for geometric defect detection in gears.
 The dataset is released in two formats: polygon mesh (`.ply`) and 3D point cloud (`.txt`).
 
 ## Dataset Overview
@@ -19,19 +19,19 @@ The dataset is released in two formats: polygon mesh (`.ply`) and 3D point cloud
 | Parts per class      | 500                                        |
 | Points per part      | 100,000                                    |
 | Mesh format          | `.ply` (polygon mesh)                      |
-| Point cloud format   | `.txt` (x y z, space-separated)            |
+| Point cloud format   | `.txt` (x y z, comma-separated)            |
 | Point cloud size     | ~168 GB                                    |
 
 **Quality classes:**
 | Label | Class | Description |
 |---|---|---|
-| `G0` | Standard | No defect |
+| `G0` | Good / nominal | No defect |
 | `P0` | Pitting | Surface fatigue damage |
 | `W0` | Tooth wear | Material loss due to friction |
 | `R0` | Root breakage | Fracture at tooth root |
 
 **Gear designs** span three tooth counts (20, 30, 40) and four inner diameters each.
-Full design parameters are in `metadata/design_table.csv`.
+Full design parameters are in `metadata/gear_basemodels.xlsx`.
 
 ## Dataset Access
 
@@ -42,7 +42,7 @@ Full design parameters are in `metadata/design_table.csv`.
 
 ## File Naming Convention
 
-All files follow the pattern `{DesignID}{QualityClass}_{NNNNN}.{ext}`:
+All files follow the pattern `{DesignID}{QualityClass}_{#####}.{ext}`:
 ```
 T20ID10G0_00001.ply   → design T20ID10, good part, index 1, mesh
 T20ID10G0_00001.txt   → same part, point cloud format
@@ -57,7 +57,7 @@ mfgnet-gear/
 data_generation/
 solidworks/     ← SolidWorks master part, design tables, macro
 sampling/       ← Open3D point cloud sampling script
-metadata/         ← Design parameters, defect params, train/val/test splits
+metadata/       ← Design parameters, defect params, train/val/test splits
 ```
 
 
@@ -106,11 +106,11 @@ More publications coming up...
 
 ## License
 
-Code in this repository: MIT License.
+Code in this repository: MIT License. \
 Dataset: Creative Commons Attribution 4.0 (CC BY 4.0).
 
 ## Contact
 
-Ruo-Syuan Mei — rsmei@umich.edu
+Ruo-Syuan Mei — rsmei@umich.edu \
 Chenhui Shao — chshao@umich.edu
 
