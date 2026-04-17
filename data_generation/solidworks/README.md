@@ -1,30 +1,40 @@
 # SolidWorks Gear Generation
 
-This folder contains the design tables and macros used to generate 
-gear CAD models in SolidWorks 2021.
+This folder contains the master part file, design tables, and macro
+used to generate gear CAD models in SolidWorks 2021.
 
 ## Requirements
 
-- SolidWorks 2021 (or later)
+- SolidWorks 2021 (other versions may work but are untested)
 - Basic familiarity with SolidWorks design tables and macros
 
 ## Files
 
 | File | Description |
 |---|---|
-| `design_table.xlsx` | Gear design parameters for all 12 configurations |
-| `defect_table_randomized.xlsx` | Defect parameters drawn from distributions |
-| `defect_table_fixed.xlsx` | Fixed defect parameters for T20ID15 |
-| `gear_macro.swp` | SolidWorks macro to batch-generate CAD files |
+| `master_gear.sldprt` | Master gear part file — base geometry driven by design table |
+| `design_tables/G0_standard.xlsx` | Parameters for 500 standard gears (no defect) |
+| `design_tables/P0_pitting.xlsx` | Parameters for 500 pitting defect gears |
+| `design_tables/W0_wear.xlsx` | Parameters for 500 tooth wear defect gears |
+| `design_tables/R0_breakage.xlsx` | Parameters for 500 root breakage defect gears |
+| `macros/batch_export.swp` | SolidWorks macro for batch `.ply` export |
 
-## How to Run
+## Step-by-Step Instructions
 
-1. Open SolidWorks 2021
-2. Open the base gear part file (`.SLDPRT`)
-3. Go to **Tools → Macros → Run** and select `gear_macro.swp`
-4. When prompted, point the macro to `design_table.xlsx`
-5. The macro will iterate through all rows in the design table and 
-   save each configuration as a `.PLY` file in your specified output directory
+**For each quality class (repeat 4 times):**
+
+1. Open `master_gear.sldprt` in SolidWorks 2021
+2. Go to **Insert → Tables → Design Table → From File**
+3. Select the appropriate `.xlsx` file for the quality class you want to generate
+4. SolidWorks will create one configuration per row in the table
+5. Go to **Tools → Macros → Run** and select `macros/batch_export.swp`
+6. When prompted, enter:
+   - **Input path**: directory of the open part file
+   - **Output path**: directory where `.ply` files will be saved
+7. The macro will iterate through all configurations and save each as
+   `{DesignID}{QualityClass}_{NNNNN}.ply`
+
+Repeat for all four design tables to generate the full mesh dataset.
 
 ## Design Parameters
 
@@ -36,17 +46,31 @@ gear CAD models in SolidWorks 2021.
 | Mirror Distance | MD | mm | Mirror distance |
 | Involute Gap | IG | mm | Gap between involute profiles |
 | Dedendum | Den. | mm | Dedendum circle diameter |
-| Number of Teeth | NTeeth | — | Tooth count |
+| Number of Teeth | NTeeth | — | Tooth count (20, 30, or 40) |
 | Inner Diameter | ID | mm | Central bore diameter |
+
+Full parameter values for all 12 designs are in `metadata/design_table.csv`.
 
 ## Manufacturing Variability
 
-A variability of ±0.0254 mm is introduced to each design parameter 
-to simulate real-world manufacturing tolerances. This is controlled 
-in `design_table.xlsx` — see the `variability` column.
+Each design parameter includes ±0.0254 mm variability drawn uniformly
+at random across 500 parts per class, simulating real manufacturing tolerances.
+This variability is encoded directly in the `.xlsx` design tables.
+
+## Defect Parameters
+
+Three additional parameter sets control defect geometry.
+See `metadata/defect_parameters.csv` for all ranges and distributions.
+
+| Defect | Key parameters |
+|---|---|
+| Pitting (P0) | `dentR`, `pittingR`, `pittingAngle`, `pittingDist` |
+| Tooth wear (W0) | `ToothLossDist` |
+| Root breakage (R0) | `ToothDepth`, `ToothDist1`, `ToothDist2`, `ToothTail`, `ToothWidth` |
 
 ## Output
 
-Each run produces one `.PLY` polygon mesh file per gear configuration,
-saved as `{design_name}_{class}_{part_id}.PLY`.
-These files are then passed to the sampling script.
+Each run produces `.ply` polygon mesh files saved as:
+`{DesignID}{QualityClass}_{NNNNN}.ply`
+
+Example: `T20ID15P0_00001.ply` through `T20ID15P0_00500.ply`
