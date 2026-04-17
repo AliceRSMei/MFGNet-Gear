@@ -111,6 +111,5 @@ Dataset: Creative Commons Attribution 4.0 (CC BY 4.0).
 
 ## Contact
 
-Ruo-Syuan Mei — rsmei@umich.edu \
-Chenhui Shao — chshao@umich.edu
+Alice Mei 
 
