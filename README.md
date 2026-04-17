@@ -6,7 +6,8 @@
 [![Paper](https://img.shields.io/badge/Paper-Manufacturing%20Letters%202024-green)](https://doi.org/10.1016/j.mfglet.2024.09.159)
 
 This repository contains the data generation code and metadata for **MFGNet-Gear**,
-a synthetic 3D benchmark dataset for geometric defect detection in gears.
+a synthetic 3D benchmark dataset for geometric defect detection in gears. 
+
 The dataset is released in two formats: polygon mesh (`.ply`) and 3D point cloud (`.txt`).
 
 ## Dataset Overview
