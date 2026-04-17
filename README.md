@@ -55,10 +55,10 @@ T30ID30R0_00412.txt   → design T30ID30, root breakage, index 412
 
 ```
 mfgnet-gear/
-data_generation/
-solidworks/     ← SolidWorks master part, design tables, macro
-sampling/       ← Open3D point cloud sampling script
-metadata/       ← Design parameters, defect params, train/val/test splits
+  -- data_generation/
+  -- solidworks/     ← SolidWorks master part, design tables, macro
+  -- sampling/       ← Open3D point cloud sampling script
+  -- metadata/       ← Design parameters, defect params, train/val/test splits
 ```
 
 
