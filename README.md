@@ -1,106 +1,110 @@
-# MFGNet-Gear
-A Synthetic 3D Point Cloud Dataset for Geometric Defect Detection in Gears
+# MFGNet-Gear: A 3D Point Cloud Dataset for Geometric Defect Detection in Gears
 
 [![DOI](https://zenodo.org/badge/DOI/YOUR_ZENODO_DOI.svg)](https://doi.org/YOUR_ZENODO_DOI)
-[![Dataset on IEEE DataPort](https://img.shields.io/badge/Dataset-IEEE%20DataPort-blue)](https://YOUR_DATAPORT_LINK)
-[![Dataset on HuggingFace](https://img.shields.io/badge/Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/YOUR_HF_REPO)
+[![Dataset](https://img.shields.io/badge/Dataset-IEEE%20DataPort-blue)](YOUR_DATAPORT_URL)
+[![HuggingFace](https://img.shields.io/badge/Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/YOUR_HF_REPO)
+[![Paper](https://img.shields.io/badge/Paper-Manufacturing%20Letters%202024-green)](https://doi.org/10.1016/j.mfglet.2024.XXXXX)
 
-This repository contains the data generation code and metadata for the **MFGNet-Gear** dataset, 
-a synthetic 3D point cloud benchmark dataset for geometric defect detection in gears.
+This repository contains the data generation code and metadata for **MFGNet-Gear**,
+a synthetic 3D benchmark dataset for geometric defect detection in gear manufacturing.
+The dataset is released in two formats: polygon mesh (`.ply`) and 3D point cloud (`.txt`).
 
 ## Dataset Overview
 
-| Property | Value |
-|---|---|
-| Total parts | 24,000 |
-| Gear designs | 12 |
-| Quality classes | 4 (G0, P0, W0, R0) |
-| Points per part | 100,000 |
-| Total size | ~168 GB |
-| File format | .txt (x, y, z coordinates) |
+| Property             | Value                                      |
+|----------------------|--------------------------------------------|
+| Total parts          | 24,000                                     |
+| Gear designs         | 12 (T20–T40 series)                        |
+| Quality classes      | 4 (G0, P0, W0, R0)                         |
+| Parts per class      | 500                                        |
+| Points per part      | 100,000                                    |
+| Mesh format          | `.ply` (polygon mesh)                      |
+| Point cloud format   | `.txt` (x y z, space-separated)            |
+| Point cloud size     | ~168 GB                                    |
 
 **Quality classes:**
-- `G0` — Standard (no defect)
-- `P0` — Pitting
-- `W0` — Tooth wear
-- `R0` — Tooth root breakage
+| Label | Class | Description |
+|---|---|---|
+| `G0` | Standard | No defect |
+| `P0` | Pitting | Surface fatigue damage |
+| `W0` | Tooth wear | Material loss due to friction |
+| `R0` | Root breakage | Fracture at tooth root |
 
-**Gear designs** vary by tooth count (20, 30, 40) and inner diameter. 
-See `metadata/design_table.csv` for full specifications.
+**Gear designs** span three tooth counts (20, 30, 40) and four inner diameters each.
+Full design parameters are in `metadata/design_table.csv`.
 
 ## Dataset Access
 
-| Location | Contents | Link |
-|---|---|---|
-| IEEE DataPort | T20ID15 sample subset (2,000 parts) | YOUR_DATAPORT_LINK |
-| HuggingFace | Full dataset (24,000 parts, ~168 GB) | YOUR_HF_LINK |
+| Location | Contents |
+|---|---|
+| [IEEE DataPort](YOUR_DATAPORT_URL) | Sample subset — T20ID15, all 4 classes, both formats |
+| [HuggingFace](YOUR_HF_URL) | Full dataset — all 24,000 parts, both formats |
+
+## File Naming Convention
+
+All files follow the pattern `{DesignID}{QualityClass}_{NNNNN}.{ext}`:
+T20ID10G0_00001.ply   → design T20ID10, good part, index 1, mesh
+T20ID10G0_00001.txt   → same part, point cloud format
+T30ID30R0_00412.txt   → design T30ID30, root breakage, index 412
 
 ## Repository Structure
-```
 mfgnet-gear/
 data_generation/
-solidworks/       ← Design tables and SolidWorks macros
-sampling/         ← Open3D point cloud sampling script
-defect_generation/← Defect parameter configuration
-metadata/
-design_table.csv
-defect_parameters_randomized.csv
-defect_parameters_fixed.csv
-README.md
-```
+solidworks/     ← SolidWorks master part, design tables, macro
+sampling/       ← Open3D point cloud sampling script
+metadata/         ← Design parameters, defect params, train/val/test splits
 
 ## Quick Start
 
-**1. Generate gear CAD models**
-See `data_generation/solidworks/README.md` for instructions on 
-running the SolidWorks macro with the design tables.
+**Step 1 — Generate mesh files (requires SolidWorks 2021)**
 
-**2. Sample point clouds from CAD files**
+See `data_generation/solidworks/README.md`.
+
+**Step 2 — Sample point clouds from meshes**
+
 ```bash
 pip install -r data_generation/sampling/requirements.txt
+
 python data_generation/sampling/sample_point_cloud.py \
-  --input_dir /path/to/ply_files \
-  --output_dir /path/to/output \
-  --n_points 100000
+    --input_dir /path/to/ply_files \
+    --output_dir /path/to/txt_output \
+    --n_points 100000
 ```
 
-**3. Download the dataset**
+**Step 3 — Download the dataset**
+
 ```python
+# Full dataset via HuggingFace
 from huggingface_hub import snapshot_download
 snapshot_download(repo_id="YOUR_HF_REPO", repo_type="dataset")
 ```
 
-## Related Publication
+## Citation
 
-A dataset descriptor paper is under preparation. 
-```
-Citation will be updated upon publication.
-```
-
-
-If you use this dataset, please cite:
+If you use MFGNet-Gear, please cite both the dataset descriptor and the original paper:
 
 ```bibtex
 @article{mei2024mfgnet,
   title={Deep Learning of 3D Point Clouds for Detecting Geometric Defects in Gears},
-  author={Mei, Ruo-Syuan and Conway, Christopher H. and Bimrose, Miles V. 
+  author={Mei, Ruo-Syuan and Conway, Christopher H. and Bimrose, Miles V.
           and King, William P. and Shao, Chenhui},
   journal={Manufacturing Letters},
   volume={41},
   pages={1324--1333},
-  year={2024},
-  publisher={Elsevier}
+  year={2024}
 }
+}
+
+More publications to be shared.
 ```
-
-
 
 ## License
 
-The code in this repository is licensed under the MIT License.  
-The dataset is licensed under CC BY 4.0.
+Code in this repository: MIT License.
+Dataset: Creative Commons Attribution 4.0 (CC BY 4.0).
 
 ## Contact
 
-Alice Mei — rsmei@umich.edu  
+Ruo-Syuan Mei — rsmei@umich.edu
+Chenhui Shao — chshao@umich.edu
 
