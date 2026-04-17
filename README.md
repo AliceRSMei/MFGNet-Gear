@@ -42,17 +42,24 @@ Full design parameters are in `metadata/design_table.csv`.
 
 ## File Naming Convention
 
+```
 All files follow the pattern `{DesignID}{QualityClass}_{NNNNN}.{ext}`:
 T20ID10G0_00001.ply   → design T20ID10, good part, index 1, mesh
 T20ID10G0_00001.txt   → same part, point cloud format
 T30ID30R0_00412.txt   → design T30ID30, root breakage, index 412
+```
+
 
 ## Repository Structure
+
+```
 mfgnet-gear/
 data_generation/
 solidworks/     ← SolidWorks master part, design tables, macro
 sampling/       ← Open3D point cloud sampling script
 metadata/         ← Design parameters, defect params, train/val/test splits
+```
+
 
 ## Quick Start
 
