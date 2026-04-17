@@ -3,7 +3,7 @@
 [![DOI](https://zenodo.org/badge/DOI/YOUR_ZENODO_DOI.svg)](https://doi.org/YOUR_ZENODO_DOI)
 [![Dataset](https://img.shields.io/badge/Dataset-IEEE%20DataPort-blue)](YOUR_DATAPORT_URL)
 [![HuggingFace](https://img.shields.io/badge/Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/YOUR_HF_REPO)
-[![Paper](https://img.shields.io/badge/Paper-Manufacturing%20Letters%202024-green)](https://doi.org/10.1016/j.mfglet.2024.XXXXX)
+[![Paper](https://img.shields.io/badge/Paper-Manufacturing%20Letters%202024-green)](https://doi.org/10.1016/j.mfglet.2024.09.159)
 
 This repository contains the data generation code and metadata for **MFGNet-Gear**,
 a synthetic 3D benchmark dataset for geometric defect detection in gear manufacturing.
@@ -43,7 +43,7 @@ Full design parameters are in `metadata/design_table.csv`.
 ## File Naming Convention
 
 All files follow the pattern `{DesignID}{QualityClass}_{NNNNN}.{ext}`:
-T20ID10G0_00001.ply   → design T20ID10, good part, index 1, mesh
+T20ID10G0_00001.ply   → design T20ID10, good part, index 1, mesh \n
 T20ID10G0_00001.txt   → same part, point cloud format
 T30ID30R0_00412.txt   → design T30ID30, root breakage, index 412
 
@@ -93,9 +93,8 @@ If you use MFGNet-Gear, please cite both the dataset descriptor and the original
   pages={1324--1333},
   year={2024}
 }
-}
 
-More publications to be shared.
+More publications coming up...
 ```
 
 ## License
