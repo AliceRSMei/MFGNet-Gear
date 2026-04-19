@@ -5,7 +5,7 @@ used to generate gear CAD models in SolidWorks 2021.
 
 ## Requirements
 
-- SolidWorks 2021 (other versions may work but are untested)
+- SolidWorks 2021
 - Basic familiarity with SolidWorks design tables and macros
 
 ## Files
