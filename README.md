@@ -1,5 +1,6 @@
 # MFGNet-Gear: A Synthetic 3D Dataset for Geometric Defect Detection in Gears
 [![Dataset](https://img.shields.io/badge/Dataset-Deep%20Blue%20Data%202026-blue)](https://doi.org/10.7302/qrdj-n812)
+[![HuggingFace](https://img.shields.io/badge/🤗%20HuggingFace-MFGNet--Gear-yellow)](https://huggingface.co/datasets/rsmei/MFGNet-Gear)
 [![Paper](https://img.shields.io/badge/Paper-Manufacturing%20Letters%202024-green)](https://doi.org/10.1016/j.mfglet.2024.09.159)
 
 This repository contains the data generation code and metadata for **MFGNet-Gear**,
@@ -35,7 +36,8 @@ Full design parameters are in `cad2ply/gear_basemodels.xlsx`.
 
 | Location | Contents |
 |---|---|
-| [Deep Blue Data](https://deepblue.lib.umich.edu/data/concern/data_sets/zk51vj240) | Full dataset — all 24,000 parts, both formats |
+| [Deep Blue Data](https://deepblue.lib.umich.edu/data/concern/data_sets/zk51vj240) | Full dataset — all 24,000 parts, both formats (`.ply` and `.txt`) |
+| [HuggingFace](https://huggingface.co/datasets/rsmei/MFGNet-Gear) | Mesh files only (`.ply`) — point clouds available on Deep Blue Data |
 
 ## File Naming Convention
 
