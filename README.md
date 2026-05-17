@@ -1,4 +1,4 @@
-# MFGNet-Gear: A 3D Point Cloud Dataset for Geometric Defect Detection in Gears
+# MFGNet-Gear: A Synthetic 3D Dataset for Geometric Defect Detection in Gears
 [![Dataset](https://img.shields.io/badge/Dataset-Deep%20Blue%20Data%202026-blue)](https://doi.org/10.7302/qrdj-n812)
 [![Paper](https://img.shields.io/badge/Paper-Manufacturing%20Letters%202024-green)](https://doi.org/10.1016/j.mfglet.2024.09.159)
 
@@ -35,16 +35,15 @@ Full design parameters are in `metadata/gear_basemodels.xlsx`.
 
 | Location | Contents |
 |---|---|
-| [IEEE DataPort](YOUR_DATAPORT_URL) | Sample subset — T20ID15, all 4 classes, both formats |
-| [HuggingFace](YOUR_HF_URL) | Full dataset — all 24,000 parts, both formats |
+| [Deep Blue Data](https://deepblue.lib.umich.edu/data/concern/data_sets/zk51vj240) | Full dataset — all 24,000 parts, both formats |
 
 ## File Naming Convention
 
-All files follow the pattern `{DesignID}{QualityClass}_{#####}.{ext}`:
+All files follow the pattern `T{NumberOfTeeth}ID{InnerDiameter}{QualityClass}0_{#####}.{ext}`:
 ```
 T20ID10G0_00001.ply   → design T20ID10, good part, index 1, mesh
 T20ID10G0_00001.txt   → same part, point cloud format
-T30ID30R0_00412.txt   → design T30ID30, root breakage, index 412
+T30ID30R0_00412.txt   → design T30ID30, tooth root breakage, index 412
 ```
 
 
