@@ -1,5 +1,5 @@
 # MFGNet-Gear: A 3D Point Cloud Dataset for Geometric Defect Detection in Gears
-[![Dataset](https://deepblue.lib.umich.edu/data/concern/data_sets/zk51vj240)](https://doi.org/10.7302/qrdj-n812)
+[![Dataset](https://img.shields.io/badge/Dataset-Deep%20Blue%20Data%202026-blue)](https://doi.org/10.7302/qrdj-n812)
 [![Paper](https://img.shields.io/badge/Paper-Manufacturing%20Letters%202024-green)](https://doi.org/10.1016/j.mfglet.2024.09.159)
 
 This repository contains the data generation code and metadata for **MFGNet-Gear**,
