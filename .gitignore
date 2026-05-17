@@ -1,0 +1,31 @@
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Data files (dataset lives on Deep Blue Data, not GitHub)
+data/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# SolidWorks backup/temp files
+*.swp
+*.sldprt.bak
+
+# Editor
+.vscode/
+.idea/
+*.suo

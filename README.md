@@ -3,7 +3,7 @@
 [![Paper](https://img.shields.io/badge/Paper-Manufacturing%20Letters%202024-green)](https://doi.org/10.1016/j.mfglet.2024.09.159)
 
 This repository contains the data generation code and metadata for **MFGNet-Gear**,
-a synthetic 3D benchmark dataset for geometric defect detection in gears. 
+a synthetic 3D benchmark dataset for geometric defect detection in gears.
 
 The dataset is released in two formats: polygon mesh (`.ply`) and 3D point cloud (`.txt`).
 
@@ -17,8 +17,8 @@ The dataset is released in two formats: polygon mesh (`.ply`) and 3D point cloud
 | Parts per class      | 500                                        |
 | Points per part      | 100,000                                    |
 | Mesh format          | `.ply` (polygon mesh)                      |
-| Point cloud format   | `.txt` (x y z, comma-separated)            |
-| Point cloud size     | ~168 GB                                    |
+| Point cloud format   | `.txt` (x,y,z comma-separated)             |
+| Dataset size         | ~11 GB for mesh, ~30 GB for point cloud    |
 
 **Quality classes:**
 | Label | Class | Description |
@@ -29,7 +29,7 @@ The dataset is released in two formats: polygon mesh (`.ply`) and 3D point cloud
 | `R0` | Root breakage | Fracture at tooth root |
 
 **Gear designs** span three tooth counts (20, 30, 40) and four inner diameters each.
-Full design parameters are in `metadata/gear_basemodels.xlsx`.
+Full design parameters are in `cad2ply/gear_basemodels.xlsx`.
 
 ## Dataset Access
 
@@ -39,53 +39,61 @@ Full design parameters are in `metadata/gear_basemodels.xlsx`.
 
 ## File Naming Convention
 
-All files follow the pattern `T{NumberOfTeeth}ID{InnerDiameter}{QualityClass}0_{#####}.{ext}`:
+All files follow the pattern `T{NumberOfTeeth}ID{InnerDiameter}{QualityClass}_{#####}.{ext}`:
 ```
 T20ID10G0_00001.ply   → design T20ID10, good part, index 1, mesh
 T20ID10G0_00001.txt   → same part, point cloud format
 T30ID30R0_00412.txt   → design T30ID30, tooth root breakage, index 412
 ```
 
-
 ## Repository Structure
 
 ```
 mfgnet-gear/
--- data_generation/
--- solidworks/     ← SolidWorks master part, design tables, macro
--- sampling/       ← Open3D point cloud sampling script
--- metadata/       ← Design parameters, defect params, train/val/test splits
+├── cad2ply/          ← SolidWorks master parts, design tables, export macro
+├── ply2pcd/          ← Point cloud sampling and visualization scripts
+├── requirements.txt
+└── LICENSE
 ```
-
 
 ## Quick Start
 
-**Step 1 — Generate mesh files (requires SolidWorks 2021)**
+### Step 1 — Generate mesh files (SolidWorks 2024 compatible)
 
-See `data_generation/solidworks/README.md`.
+Before running the macro, open `cad2ply/saveply.swp` in SolidWorks (**Tools → Macros → Edit**) and replace the two placeholders:
 
-**Step 2 — Sample point clouds from meshes**
+| Placeholder | What to put |
+|---|---|
+| `<OUTPUT_DIRECTORY>` | Full path to the folder where `.ply` files should be saved (e.g. `C:\data\ply\T20ID10G0`) |
+| `<PART_FILE_NAME>` | Name of the open `.SLDPRT` file without extension (e.g. `T20ID10G0`) |
+
+Then:
+
+1. Open a master part file (e.g. `cad2ply/T20ID10G0.SLDPRT`) in SolidWorks
+2. Go to **Insert → Tables → Excel Design Table → From File** and select the matching `.xlsx`
+3. Go to **Tools → Macros → Run** and select `cad2ply/saveply.swp`
+4. Repeat for all four quality classes and all gear designs
+
+### Step 2 — Sample point clouds from meshes
 
 ```bash
-pip install -r data_generation/sampling/requirements.txt
+pip install -r requirements.txt
 
-python data_generation/sampling/sample_point_cloud.py \
-    --input_dir /path/to/ply_files \
-    --output_dir /path/to/txt_output \
-    --n_points 100000
+python ply2pcd/point_sampling.py \
+    --input_dir  data/ply \
+    --output_dir data/pcd \
+    --num_points 100000
 ```
 
-**Step 3 — Download the dataset**
+### Step 3 — Visualize a point cloud
 
-```python
-# Full dataset via HuggingFace
-from huggingface_hub import snapshot_download
-snapshot_download(repo_id="YOUR_HF_REPO", repo_type="dataset")
+```bash
+python ply2pcd/visualize_pcd.py data/pcd/T20ID10G0/T20ID10G0_00001.txt
 ```
 
 ## Citation
 
-If you use MFGNet-Gear, please cite both the dataset descriptor and the original paper:
+If you use MFGNet-Gear, please cite:
 
 ```bibtex
 @article{mei2024deep,
@@ -97,16 +105,15 @@ If you use MFGNet-Gear, please cite both the dataset descriptor and the original
   year={2024},
   publisher={Elsevier}
 }
-
-More publications coming up...
 ```
+
+A dataset descriptor paper is in preparation for IEEE Data Descriptions.
 
 ## License
 
-Code in this repository: MIT License. \
+Code in this repository: MIT License.\
 Dataset: Creative Commons Attribution 4.0 (CC BY 4.0).
 
 ## Contact
 
-Alice Mei 
-
+Alice Mei — [github.com/AliceRSMei](https://github.com/AliceRSMei)
