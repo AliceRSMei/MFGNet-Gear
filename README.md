@@ -1,6 +1,4 @@
 # MFGNet-Gear: A 3D Point Cloud Dataset for Geometric Defect Detection in Gears
-
-[![DOI](https://zenodo.org/badge/DOI/YOUR_ZENODO_DOI.svg)](https://doi.org/YOUR_ZENODO_DOI)
 [![Dataset](https://deepblue.lib.umich.edu/data/concern/data_sets/zk51vj240)](https://doi.org/10.7302/qrdj-n812)
 [![Paper](https://img.shields.io/badge/Paper-Manufacturing%20Letters%202024-green)](https://doi.org/10.1016/j.mfglet.2024.09.159)
 
