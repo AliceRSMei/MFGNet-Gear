@@ -109,7 +109,7 @@ If you use MFGNet-Gear, please cite:
 }
 ```
 
-A dataset descriptor paper is in preparation for IEEE Data Descriptions.
+A dataset descriptor paper is in preparation.
 
 ## License
 
