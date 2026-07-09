@@ -1,0 +1,305 @@
+{
+  "config": {
+    "mesh_dir": "D:/rsmei/MFGNet-Gear_IEEEDataDescriptions/MFGNet-Gear/data/mesh_ply",
+    "pcd_dir": "D:/rsmei/MFGNet-Gear_IEEEDataDescriptions/MFGNet-Gear/data/pointcloud_txt",
+    "design_table": "cad2ply/gear_basemodels.xlsx",
+    "out_dir": "validation/report",
+    "geom_sample": 25,
+    "full_geom": true,
+    "geom_source": "mesh",
+    "workers": 12,
+    "seed": 0,
+    "skip_mesh": false,
+    "skip_pointcloud": true,
+    "skip_geometry": false
+  },
+  "completeness": {
+    "n_folders": 48,
+    "expected_folders": 48,
+    "all_folders_500": true,
+    "total_mesh": 24000,
+    "total_pcd": 24000,
+    "folders_missing_mesh": [],
+    "folders_missing_pcd": [],
+    "stem_mismatches": [],
+    "counts": {
+      "T20ID10G0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID10P0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID10R0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID10W0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID15G0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID15P0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID15R0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID15W0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID20G0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID20P0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID20R0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID20W0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID25G0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID25P0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID25R0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T20ID25W0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID20G0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID20P0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID20R0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID20W0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID30G0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID30P0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID30R0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID30W0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID40G0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID40P0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID40R0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID40W0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID50G0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID50P0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID50R0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T30ID50W0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID30G0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID30P0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID30R0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID30W0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID40G0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID40P0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID40R0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID40W0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID50G0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID50P0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID50R0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID50W0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID60G0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID60P0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID60R0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      },
+      "T40ID60W0": {
+        "mesh": 500,
+        "pcd": 500,
+        "stem_match": true
+      }
+    }
+  },
+  "pointcloud_integrity": {
+    "n_total": 24000,
+    "n_passed": 24000,
+    "pass_pct": 100.0,
+    "n_errors": 0,
+    "example_errors": [],
+    "breakdown": {
+      "shape_ok": 24000,
+      "count_ok": 24000,
+      "finite_ok": 24000,
+      "unique_ok": 24000
+    }
+  },
+  "mesh_integrity": {
+    "n_total": 24000,
+    "n_passed": 23990,
+    "pass_pct": 99.9583,
+    "n_errors": 0,
+    "example_errors": [],
+    "breakdown": {
+      "loads_ok": 24000,
+      "has_faces": 24000,
+      "is_closed": 23996,
+      "degenerate_ok": 23991
+    }
+  },
+  "geometry": {
+    "n_parts": 24000,
+    "n_designs": 12,
+    "surf_to_pt_mean_mm": 0.17813116618356534,
+    "surf_to_pt_max_mm": 2.2498341400914432,
+    "sampling_spacing_mm": 0.3578118287015514,
+    "outer_dia_abs_err_mm": 0.006736374300866068,
+    "outer_dia_max_abs_err_mm": 0.03487554350947164,
+    "teeth_match_frac": 1.0,
+    "n_designs_all_match": 12
+  }
+}
