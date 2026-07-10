@@ -16,7 +16,7 @@ The dataset is released in two formats: polygon mesh (`.ply`) and 3D point cloud
 | Total parts          | 24,000                                     |
 | Gear designs         | 12 (T20–T40 series)                        |
 | Quality classes      | 4 (G0, P0, W0, R0)                         |
-| Parts per desing-quality class        | 500                                        |
+| Parts per design-quality class        | 500                                        |
 | Points per part      | 100,000                                    |
 | Mesh format          | `.ply` (polygon mesh)                      |
 | Point cloud format   | `.txt` (x,y,z comma-separated)             |
