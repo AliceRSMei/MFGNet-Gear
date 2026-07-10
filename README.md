@@ -3,8 +3,9 @@
 [![HuggingFace](https://img.shields.io/badge/🤗%20HuggingFace-MFGNet--Gear-yellow)](https://huggingface.co/datasets/rsmei/MFGNet-Gear)
 [![Paper](https://img.shields.io/badge/Paper-Manufacturing%20Letters%202024-green)](https://doi.org/10.1016/j.mfglet.2024.09.159)
 
-This repository contains the data generation code and metadata for **MFGNet-Gear**,
-a synthetic 3D benchmark dataset for geometric defect detection in gears.
+This repository contains the data generation, sampling, and quality-validation
+code for **MFGNet-Gear**, a synthetic 3D benchmark dataset for geometric defect
+detection in gears.
 
 The dataset is released in two formats: polygon mesh (`.ply`) and 3D point cloud (`.txt`).
 
@@ -54,6 +55,7 @@ T30ID30R0_00412.txt   → design T30ID30, tooth root breakage, index 412
 mfgnet-gear/
 ├── cad2ply/          ← SolidWorks master parts, design tables, export macro
 ├── ply2pcd/          ← Point cloud sampling and visualization scripts
+├── validation/       ← Dataset quality-validation script, report, and figures
 ├── requirements.txt
 └── LICENSE
 ```
@@ -92,6 +94,25 @@ python ply2pcd/point_sampling.py \
 ```bash
 python ply2pcd/visualize_pcd.py data/pcd/T20ID10G0/T20ID10G0_00001.txt
 ```
+
+### Step 4 — Validate the dataset (optional)
+
+Verify completeness/class balance, per-file structural integrity, sampling
+coverage, and geometric accuracy against the design table:
+
+```bash
+pip install -r validation/requirements-validation.txt
+
+python validation/validate_dataset.py \
+    --mesh_dir  data/mesh_ply \
+    --pcd_dir   data/pointcloud_txt \
+    --design_table cad2ply/gear_basemodels.xlsx \
+    --out_dir   validation/report \
+    --full-geom --workers 12
+```
+
+Results (a JSON summary, a per-design table, and figures) are written to
+`validation/report/`. See [`validation/README.md`](validation/README.md) for details.
 
 ## Citation
 
