@@ -37,7 +37,7 @@ Full design parameters are in `cad2ply/gear_basemodels.xlsx`.
 
 | Location | Contents |
 |---|---|
-| [Deep Blue Data](https://deepblue.lib.umich.edu/data/concern/data_sets/zk51vj240) | Full dataset — all 24,000 parts, both formats (`.ply` and `.txt`) |
+| [Deep Blue Data](https://doi.org/10.7302/qrdj-n812) | Full dataset — all 24,000 parts, both formats (`.ply` and `.txt`) |
 | [HuggingFace](https://huggingface.co/datasets/rsmei/MFGNet-Gear) | Mesh files only (`.ply`) — point clouds available on Deep Blue Data |
 
 ## File Naming Convention
