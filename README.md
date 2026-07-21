@@ -130,6 +130,18 @@ If you use MFGNet-Gear, please cite:
 }
 ```
 
+```bibtex
+@misc{mei2026synthetic3dgeardataset,
+      title={A Synthetic 3D Gear Dataset for Manufacturing Quality Inspection (MFGNet-Gear)}, 
+      author={Ruo-Syuan Mei and Chenhui Shao},
+      year={2026},
+      eprint={2607.16288},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2607.16288}, 
+}
+```
+
 A dataset descriptor paper is in preparation.
 
 ## License
