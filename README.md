@@ -2,7 +2,7 @@
 [![Dataset](https://img.shields.io/badge/Dataset-Deep%20Blue%20Data%202026-blue)](https://doi.org/10.7302/qrdj-n812)
 [![HuggingFace](https://img.shields.io/badge/🤗%20HuggingFace-MFGNet--Gear-yellow)](https://huggingface.co/datasets/rsmei/MFGNet-Gear)
 [![Paper](https://img.shields.io/badge/Paper-Manufacturing%20Letters%202024-green)](https://doi.org/10.1016/j.mfglet.2024.09.159)
-[![Paper](https://img.shields.io/badge/Paper-arXiv%202024-green)](https://arxiv.org/abs/2607.16288)
+[![Paper](https://img.shields.io/badge/Paper-arXiv%202026-green)](https://arxiv.org/abs/2607.16288)
 
 
 This repository contains the data generation, sampling, and quality-validation
