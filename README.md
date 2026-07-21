@@ -142,7 +142,6 @@ If you use MFGNet-Gear, please cite:
 }
 ```
 
-A dataset descriptor paper is in preparation.
 
 ## License
 
