@@ -13,6 +13,8 @@ The dataset is released in two formats: polygon mesh (`.ply`) and 3D point cloud
 
 ## Dataset Overview
 
+![MFGNet-Gear dataset overview](figs/fig-MFGNet-GearDatasetOverview.png)
+
 | Property             | Value                                      |
 |----------------------|--------------------------------------------|
 | Total parts          | 24,000                                     |
