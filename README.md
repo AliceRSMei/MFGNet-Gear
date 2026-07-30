@@ -135,14 +135,14 @@ If you use MFGNet-Gear, please cite:
 ```
 
 ```bibtex
-@misc{mei2026synthetic3dgeardataset,
-      title={A Synthetic 3D Gear Dataset for Manufacturing Quality Inspection (MFGNet-Gear)}, 
-      author={Ruo-Syuan Mei and Chenhui Shao},
-      year={2026},
-      eprint={2607.16288},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2607.16288}, 
+@misc{mei2026mfgnet,
+  author    = {Mei, Ruo-Syuan and Shao, Chenhui},
+  title     = {{MFGNet-Gear: A Synthetic 3D Gear Dataset for Manufacturing Quality Inspection}},
+  year      = {2026},
+  publisher = {University of Michigan - Deep Blue Data},
+  type      = {Data set},
+  doi       = {10.7302/qrdj-n812},
+  url       = {https://doi.org/10.7302/qrdj-n812}
 }
 ```
 
