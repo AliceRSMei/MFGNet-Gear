@@ -46,6 +46,27 @@ Regenerated on each run and git-ignored (large per-file logs):
 
 - `pointcloud_integrity.csv`, `mesh_integrity.csv`, `geometry.csv`
 
+## Morphology reconstruction (Fig. 7)
+
+`reconstruct_gear.py` walks one instance through the released pipeline and shows that
+point sampling preserves the part morphology:
+
+1. the original PLY mesh (physical mm geometry),
+2. a point cloud sampled from it with the released routine (`ply2pcd/point_sampling.py`),
+3. a surface reconstructed (Poisson) from those points, and
+4. the reconstructed and source meshes overlaid.
+
+It is an interactive viewer with screenshot export, and produces the panels for **Fig. 7**
+of the data descriptor (design T30ID40 across the good, pitting, tooth-wear, and root-breakage
+classes).
+
+```bash
+python validation/reconstruct_gear.py --design T30ID40 --quality P0 --instance 1 \
+    --num_points 100000 \
+    --data /path/to/data \
+    --out  validation/figs_interactive
+```
+
 ## Note on the sampling-fidelity metric
 
 Because each point cloud is sampled *from* its mesh, the point-to-surface

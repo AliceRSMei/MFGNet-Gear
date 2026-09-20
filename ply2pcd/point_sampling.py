@@ -5,14 +5,41 @@ import os
 from pathlib import Path
 
 
-def sample_ply_to_txt(ply_path, output_path, num_points):
+def sample_points(mesh, num_points, normalize=True):
+    """Uniformly sample points from a mesh surface, optionally unit-sphere normalized.
+
+    This is the documented sampling routine used by both the command-line exporter
+    and the reconstruction viewer. It implements the sampling and normalization
+    convention of the released point clouds.
+
+    Returns (pcd, center, scale):
+      * pcd    - an Open3D PointCloud of the sampled points (unit-sphere normalized
+                 when normalize=True); it carries point normals if the mesh had
+                 vertex normals when sampled.
+      * center - the centroid of the sampled points, in millimeters.
+      * scale  - the farthest-point radius about that centroid, in millimeters.
+    The released millimeter coordinates satisfy p_mm = scale * p_norm + center.
+    """
+    pcd = mesh.sample_points_uniformly(number_of_points=num_points)
+    points = np.asarray(pcd.points)
+    center = points.mean(axis=0)
+    scale = float(np.linalg.norm(points - center, axis=1).max())
+    if normalize:
+        # Unit-sphere normalization used for the released dataset: translate to the
+        # centroid of the sampled points, then scale so the farthest point is at
+        # radius 1. Physical (mm) scale is preserved in the paired mesh and can be
+        # restored with the per-instance center/scale in metadata/normalization_params.csv.
+        pcd.points = o3d.utility.Vector3dVector((points - center) / scale)
+    return pcd, center, scale
+
+
+def sample_ply_to_txt(ply_path, output_path, num_points, normalize=True):
     mesh = o3d.io.read_triangle_mesh(str(ply_path))
     if not mesh.has_triangles():
         print(f"  [SKIP] No triangles found in {ply_path.name}")
         return
 
-    pcd = mesh.sample_points_uniformly(number_of_points=num_points)
-
+    pcd, _, _ = sample_points(mesh, num_points, normalize=normalize)
     points = np.asarray(pcd.points)
 
     lines = []
@@ -45,8 +72,15 @@ def main():
     parser.add_argument(
         "--num_points", "-n",
         type=int,
-        default=2048,
-        help="Number of points to sample from each mesh (default: 2048)"
+        default=100000,
+        help="Number of points to sample from each mesh (default: 100000, as released)"
+    )
+    parser.add_argument(
+        "--no-normalize",
+        dest="normalize",
+        action="store_false",
+        help="Save raw mm coordinates instead of unit-sphere-normalized ones "
+             "(the released dataset is normalized; normalization is on by default)"
     )
     args = parser.parse_args()
 
@@ -76,7 +110,7 @@ def main():
         output_path = output_dir / relative.parent / (ply_path.stem + ".txt")
         output_path.parent.mkdir(parents=True, exist_ok=True)
         print(f"Processing: {relative}")
-        sample_ply_to_txt(ply_path, output_path, args.num_points)
+        sample_ply_to_txt(ply_path, output_path, args.num_points, normalize=args.normalize)
 
     print("\nDone.")
 

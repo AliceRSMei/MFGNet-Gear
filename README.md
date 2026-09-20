@@ -4,29 +4,36 @@
 [![Paper](https://img.shields.io/badge/Paper-Manufacturing%20Letters%202024-green)](https://doi.org/10.1016/j.mfglet.2024.09.159)
 [![Paper](https://img.shields.io/badge/Paper-arXiv%202026-green)](https://arxiv.org/abs/2607.16288)
 
+**MFGNet-Gear** is a synthetic 3D benchmark dataset for geometric defect detection in gears:
+**24,000 parts** spanning **12 gear designs** and **4 quality classes**, each provided in two
+paired, ready-to-use representations.
 
-This repository contains the data generation, sampling, and quality-validation
-code for **MFGNet-Gear**, a synthetic 3D benchmark dataset for geometric defect
-detection in gears.
+- **Point clouds (`.txt`)** — 100,000 points, unit-sphere–normalized: a standardized,
+  scale-invariant input for point-cloud learning, usable as-is.
+- **PLY meshes (`.ply`)** — the physical-scale source geometry, in **millimeters**.
 
-The dataset is released in two formats: polygon mesh (`.ply`) and 3D point cloud (`.txt`).
+## Download
+
+| Location | Contents |
+|---|---|
+| [Deep Blue Data](https://doi.org/10.7302/qrdj-n812) | Full dataset — all 24,000 parts, both formats (`.ply` and `.txt`) |
+| [HuggingFace](https://huggingface.co/datasets/rsmei/MFGNet-Gear) | Mesh files only (`.ply`) — point clouds available on Deep Blue Data |
 
 ## Dataset Overview
 
 ![MFGNet-Gear dataset overview](figs/fig-MFGNet-GearDatasetOverview.png)
 
-| Property             | Value                                      |
-|----------------------|--------------------------------------------|
-| Total parts          | 24,000                                     |
-| Gear designs         | 12 (T20–T40 series)                        |
-| Quality classes      | 4 (G0, P0, W0, R0)                         |
-| Parts per design-quality class        | 500                                        |
-| Points per part      | 100,000                                    |
-| Mesh format          | `.ply` (polygon mesh)                      |
-| Point cloud format   | `.txt` (x,y,z comma-separated)             |
-| Dataset size         | ~11 GB for mesh, ~30 GB for point cloud    |
+| Property | Value |
+|---|---|
+| Total parts | 24,000 |
+| Gear designs | 12 (T20–T40 series) |
+| Quality classes | 4 (G0, P0, W0, R0) |
+| Parts per design-quality class | 500 |
+| Points per part | 100,000 |
+| Mesh format | `.ply` (polygon mesh) |
+| Point cloud format | `.txt` (x,y,z comma-separated) |
+| Dataset size | ~11 GB (mesh), ~30 GB (point cloud) |
 
-**Quality classes:**
 | Label | Class | Description |
 |---|---|---|
 | `G0` | Good / nominal | No defect |
@@ -34,89 +41,81 @@ The dataset is released in two formats: polygon mesh (`.ply`) and 3D point cloud
 | `W0` | Tooth wear | Material loss due to friction |
 | `R0` | Root breakage | Fracture at tooth root |
 
-**Gear designs** span three tooth counts (20, 30, 40) and four inner diameters each.
-Full design parameters are in `cad2ply/gear_basemodels.xlsx`.
+Gear designs span three tooth counts (20, 30, 40) and four inner diameters each.
 
-## Dataset Access
+## File Naming
 
-| Location | Contents |
-|---|---|
-| [Deep Blue Data](https://doi.org/10.7302/qrdj-n812) | Full dataset — all 24,000 parts, both formats (`.ply` and `.txt`) |
-| [HuggingFace](https://huggingface.co/datasets/rsmei/MFGNet-Gear) | Mesh files only (`.ply`) — point clouds available on Deep Blue Data |
+All files follow `T{NumberOfTeeth}ID{InnerDiameter}{QualityClass}_{#####}.{ext}`:
 
-## File Naming Convention
-
-All files follow the pattern `T{NumberOfTeeth}ID{InnerDiameter}{QualityClass}_{#####}.{ext}`:
 ```
 T20ID10G0_00001.ply   → design T20ID10, good part, index 1, mesh
-T20ID10G0_00001.txt   → same part, point cloud format
-T30ID30R0_00412.txt   → design T30ID30, tooth root breakage, index 412
+T20ID10G0_00001.txt   → same part, point cloud
+T30ID30R0_00412.txt   → design T30ID30, root breakage, index 412
 ```
 
-## Repository Structure
+A mesh and its point cloud share the same name, so `.ply` and `.txt` files pair one-to-one.
 
-```
-mfgnet-gear/
-├── cad2ply/          ← SolidWorks master parts, design tables, export macro
-├── ply2pcd/          ← Point cloud sampling and visualization scripts
-├── validation/       ← Dataset quality-validation script, report, and figures
-├── requirements.txt
-└── LICENSE
-```
+## Getting Started
 
-## Quick Start
-
-### Step 1 — Generate mesh files (SolidWorks)
-
-Before running the macro, open `cad2ply/saveply.swp` in SolidWorks (**Tools → Macros → Edit**) and replace the two placeholders:
-
-| Placeholder | What to put |
-|---|---|
-| `<OUTPUT_DIRECTORY>` | Full path to the folder where `.ply` files should be saved (e.g. `C:\data\ply\T20ID10G0`) |
-| `<PART_FILE_NAME>` | Name of the open `.SLDPRT` file without extension (e.g. `T20ID10G0`) |
-
-Then:
-
-1. Open a master part file (e.g. `cad2ply/T20ID10G0.SLDPRT`) in SolidWorks
-2. Go to **Insert → Tables → Excel Design Table → From File** and select the matching `.xlsx`
-3. Go to **Tools → Macros → Run** and select `cad2ply/saveply.swp`
-4. Repeat for all four quality classes and all gear designs
-
-### Step 2 — Sample point clouds from meshes
+The point clouds are ready to use directly. To visualize one:
 
 ```bash
 pip install -r requirements.txt
 
+python ply2pcd/visualize_pcd.py data/pointcloud_txt/T20ID10G0/T20ID10G0_00001.txt
+```
+
+### Physical (millimeter) scale
+
+The `.txt` clouds are normalized to the unit sphere (zero-centered, maximum radius 1) so they
+work directly as learning inputs. The paired PLY meshes keep the geometry in **millimeters**,
+and you can recover physical scale two ways:
+
+- **Rescale a released cloud** with the per-instance center `c` and scale `s` in
+  [`metadata/normalization_params.csv`](metadata/normalization_params.csv): `p_mm = s · p_norm + c`.
+- **Resample the mesh** at any point density, in millimeters:
+
+```bash
 python ply2pcd/point_sampling.py \
-    --input_dir  data/ply \
-    --output_dir data/pcd \
-    --num_points 100000
+    --input_dir data/mesh_ply --output_dir data/pcd_mm \
+    --num_points 500000 --no-normalize
 ```
 
-### Step 3 — Visualize a point cloud
+Drop `--no-normalize` and use `--num_points 100000` to reproduce the released normalized format.
 
-```bash
-python ply2pcd/visualize_pcd.py data/pcd/T20ID10G0/T20ID10G0_00001.txt
+## Repository Contents
+
+```
+mfgnet-gear/
+├── cad2ply/       ← SolidWorks master parts, the 48 design tables, and the export macro
+├── ply2pcd/       ← point-cloud sampling and visualization scripts
+├── metadata/      ← per-instance normalization parameters (mm recovery)
+├── validation/    ← quality-validation scripts and reported figures
+├── requirements.txt
+└── LICENSE
 ```
 
-### Step 4 — Validate the dataset (optional)
+## Data Quality
 
-Verify completeness/class balance, per-file structural integrity, sampling
-coverage, and geometric accuracy against the design table:
+Every released part was checked for completeness and class balance, file integrity, sampling
+fidelity, and geometric accuracy against its CAD specification; results are reported in the
+*Validation and Quality* section of the paper. The checks are fully scripted in
+[`validation/`](validation/) for transparency and reuse.
 
-```bash
-pip install -r validation/requirements-validation.txt
+## Reproducing or Extending the Dataset
 
-python validation/validate_dataset.py \
-    --mesh_dir  data/mesh_ply \
-    --pcd_dir   data/pointcloud_txt \
-    --design_table cad2ply/gear_basemodels.xlsx \
-    --out_dir   validation/report \
-    --full-geom --workers 12
-```
+The dataset can be regenerated from, or extended beyond, the released CAD sources.
 
-Results (a JSON summary, a per-design table, and figures) are written to
-`validation/report/`. See [`validation/README.md`](validation/README.md) for details.
+- **Design tables** — [`cad2ply/design_tables/`](cad2ply/design_tables/) contains the 48 finalized
+  SolidWorks design tables (one per design-quality class). Each row is one CAD configuration and
+  its CAD and applicable defect parameters. These are generation inputs, not measurements sampled
+  from the meshes or point clouds.
+- **Meshes** — open a master part (e.g. `cad2ply/T20ID10G0.SLDPRT`) in SolidWorks, load the matching
+  design table (**Insert → Tables → Excel Design Table → From File**), and run the export macro
+  [`cad2ply/saveply251.bas`](cad2ply/saveply251.bas) to save each configuration as PLY. The released
+  meshes were exported with SolidWorks 2021 as binary PLY in millimeters, Custom resolution,
+  deviation (chord) tolerance 0.0374114 mm, angle tolerance 10°, maximum face size unconstrained.
+- **Point clouds** — sample from the meshes with `ply2pcd/point_sampling.py` (see above).
 
 ## Citation
 
@@ -135,6 +134,18 @@ If you use MFGNet-Gear, please cite:
 ```
 
 ```bibtex
+@misc{mei2026synthetic3dgeardataset,
+      title={A Synthetic 3D Gear Dataset for Manufacturing Quality Inspection (MFGNet-Gear)},
+      author={Ruo-Syuan Mei and Chenhui Shao},
+      year={2026},
+      eprint={2607.16288},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2607.16288},
+}
+```
+
+```bibtex
 @misc{mei2026mfgnet,
   author    = {Mei, Ruo-Syuan and Shao, Chenhui},
   title     = {{MFGNet-Gear: A Synthetic 3D Gear Dataset for Manufacturing Quality Inspection}},
@@ -145,7 +156,6 @@ If you use MFGNet-Gear, please cite:
   url       = {https://doi.org/10.7302/qrdj-n812}
 }
 ```
-
 
 ## License
 

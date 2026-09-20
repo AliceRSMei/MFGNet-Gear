@@ -1,7 +1,7 @@
 {
   "config": {
-    "mesh_dir": "D:/rsmei/MFGNet-Gear_IEEEDataDescriptions/MFGNet-Gear/data/mesh_ply",
-    "pcd_dir": "D:/rsmei/MFGNet-Gear_IEEEDataDescriptions/MFGNet-Gear/data/pointcloud_txt",
+    "mesh_dir": "data/mesh_ply",
+    "pcd_dir": "data/pointcloud_txt",
     "design_table": "cad2ply/gear_basemodels.xlsx",
     "out_dir": "validation/report",
     "geom_sample": 25,

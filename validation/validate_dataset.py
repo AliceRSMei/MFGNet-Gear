@@ -25,8 +25,8 @@ on a stratified subsample per class (--geom_sample, default 25) unless --full-ge
 
 Usage:
   python validation/validate_dataset.py \
-      --mesh_dir  D:/rsmei/MFGNet-Gear_IEEEDataDescriptions/MFGNet-Gear/data/mesh_ply \
-      --pcd_dir   D:/rsmei/MFGNet-Gear_IEEEDataDescriptions/MFGNet-Gear/data/pointcloud_txt \
+      --mesh_dir  /path/to/data/mesh_ply \
+      --pcd_dir   /path/to/data/pointcloud_txt \
       --design_table cad2ply/gear_basemodels.xlsx
 """
 
