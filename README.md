@@ -102,13 +102,15 @@ mfgnet-gear/
 ## Data Quality
 
 Every released part was checked for completeness and class balance, file integrity, sampling
-fidelity, and geometric accuracy against its CAD specification; results are reported in the
+fidelity, and geometric consistency, including deviation from nominal design dimensions and
+agreement between the source meshes and the corresponding point clouds; results are reported in the
 *Validation and Quality* section of the paper. The checks are fully scripted in
 [`validation/`](validation/) for transparency and reuse.
 
 ## Reproducing or Extending the Dataset
 
-The dataset can be regenerated from, or extended beyond, the released CAD sources.
+The released CAD sources, design tables, and scripts can be used to generate new instances or
+extend the dataset to other designs, following the documented workflow and parameter distributions.
 
 - **Design tables** — [`cad2ply/design_tables/`](cad2ply/design_tables/) contains the 48
   SolidWorks design tables (one per design-quality class). Each table specifies the nominal

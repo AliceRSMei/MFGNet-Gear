@@ -72,9 +72,11 @@ python validation/mesh_cloud_agreement.py normalization --data /path/to/data --o
 Committed (small, human-readable):
 
 - `report.json` — summary of checks 1–5
-- `feature_recovery.csv` — per-design OD / tooth-count table from `validate_dataset.py`
-- `mesh_cloud_od_summary.csv` — per-design OD deviation from nominal, mesh–point-cloud OD
-  difference, and tooth count from the released point clouds
+- `feature_recovery.csv` — per-design OD deviation from nominal (mean absolute and maximum) and
+  tooth count, measured on point clouds resampled from each mesh by `validate_dataset.py`
+- `mesh_cloud_od_summary.csv` — per-design OD deviation from nominal measured on the mesh
+  vertices, mesh–point-cloud OD difference, and tooth count from the released point clouds.
+  Its OD deviations agree with `feature_recovery.csv` within 0.0001 mm.
 - `defect_agreement.csv` — per-instance defect measurements (check 7)
 - `fig-DatasetFileCount.png`, `fig-FeatureRecovery.png`, `fig-PointToSurface.png`
 

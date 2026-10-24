@@ -617,14 +617,16 @@ def write_feature_recovery_csv(rows, design_table, out):
         ods = np.array([r["recovered_outer_dia_mm"] for r in rs])
         teeth = np.array([r["recovered_teeth"] for r in rs])
         dr = design_table[token]
+        err = np.abs(ods - dr["outer_dia"])      # per-part deviation from the nominal OD
         summary.append({
             "design": token,
             "design_teeth": dr["teeth"],
             "recovered_teeth_mode": int(np.bincount(teeth).argmax()),
             "teeth_match_pct": round(100 * np.mean(teeth == dr["teeth"]), 2),
-            "design_outer_dia_mm": dr["outer_dia"],
+            "nominal_outer_dia_mm": dr["outer_dia"],
             "recovered_outer_dia_mean_mm": round(float(ods.mean()), 4),
-            "outer_dia_abs_err_mm": round(abs(float(ods.mean()) - dr["outer_dia"]), 4),
+            "outer_dia_mae_mm": round(float(err.mean()), 4),
+            "outer_dia_max_abs_err_mm": round(float(err.max()), 4),
             "n_parts": len(rs),
         })
     write_csv(out / "feature_recovery.csv", summary)
