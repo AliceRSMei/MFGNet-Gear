@@ -73,6 +73,10 @@ and you can recover physical scale two ways:
 
 - **Rescale a released cloud** with the per-instance center `c` and scale `s` in
   [`metadata/normalization_params.csv`](metadata/normalization_params.csv): `p_mm = s · p_norm + c`.
+  `c` is the centroid of the sampled points and `s` their farthest-point radius, i.e. the
+  normalization applied to each cloud. The values were recovered by registering each released
+  cloud to its PLY mesh; restored points lie on the mesh surface with a mean residual of 0.00001 mm.
+  *Updated October 2026: corrected parameter values, now given to six decimal places.*
 - **Resample the mesh** at any point density, in millimeters:
 
 ```bash
@@ -106,10 +110,12 @@ fidelity, and geometric accuracy against its CAD specification; results are repo
 
 The dataset can be regenerated from, or extended beyond, the released CAD sources.
 
-- **Design tables** — [`cad2ply/design_tables/`](cad2ply/design_tables/) contains the 48 finalized
-  SolidWorks design tables (one per design-quality class). Each row is one CAD configuration and
-  its CAD and applicable defect parameters. These are generation inputs, not measurements sampled
-  from the meshes or point clouds.
+- **Design tables** — [`cad2ply/design_tables/`](cad2ply/design_tables/) contains the 48
+  SolidWorks design tables (one per design-quality class). Each table specifies the nominal
+  parameter values and the sampling distributions used to generate the CAD configurations, one row
+  per instance. The realized per-instance parameter values are not retained in the tables; the
+  released PLY meshes are the per-instance geometric reference. Re-running the tables draws new
+  values from the same distributions.
 - **Meshes** — open a master part (e.g. `cad2ply/T20ID10G0.SLDPRT`) in SolidWorks, load the matching
   design table (**Insert → Tables → Excel Design Table → From File**), and run the export macro
   [`cad2ply/saveply251.bas`](cad2ply/saveply251.bas) to save each configuration as PLY. The released
