@@ -1,7 +1,6 @@
 Attribute VB_Name = "saveply251"
 ' ******************************************************************************
 ' SOLIDWORKS macro for exporting configurations as PLY files.
-' Personal/local paths and author metadata removed for publication.
 ' ******************************************************************************
 Dim swApp As Object
 Dim Part As Object

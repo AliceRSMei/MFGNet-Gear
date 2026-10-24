@@ -1,14 +1,14 @@
 """
 MFGNet-Gear dataset validation.
 
-Produces the numbers, tables, and figures for the "Validation and Quality"
-section of the IEEE Data Descriptions manuscript. Runs five checks:
+Checks the completeness, file integrity, and geometric quality of the dataset.
+Runs five checks:
 
-  1. Completeness & balance   -> Fig. dataset-file-count (count heatmap)
-  2. Point-cloud integrity    -> [XX]% of point clouds pass
-  3. Mesh integrity           -> [XX]% of meshes pass (closed, no degenerate faces)
+  1. Completeness & balance   -> file counts per design-quality folder (heatmap)
+  2. Point-cloud integrity    -> % of point clouds that pass
+  3. Mesh integrity           -> % of meshes that pass (closed, no degenerate faces)
   4. Sampling fidelity        -> surface-to-nearest-point coverage vs spacing
-  5. Global feature recovery  -> recovered outer diameter & tooth count vs design table
+  5. Global feature recovery  -> outer diameter & tooth count vs nominal design values
 
 Outputs (written to --out_dir, default validation/report/):
   report.json              full machine-readable results
@@ -633,7 +633,7 @@ def write_feature_recovery_csv(rows, design_table, out):
 # ----------------------------------------------------------------------------
 # Figures
 # ----------------------------------------------------------------------------
-# Publication figure style: Arial, 300 dpi, compact IEEE-column sizing.
+# Figure style: Arial, 300 dpi, compact sizing.
 COL = 3.5      # single-column width (in)
 WIDE = 7.16    # double-column width (in)
 GREEN = "#1F7A4D"

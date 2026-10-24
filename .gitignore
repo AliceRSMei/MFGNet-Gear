@@ -21,6 +21,9 @@ validation/*.log
 validation/report/mesh_integrity.csv
 validation/report/pointcloud_integrity.csv
 validation/report/geometry.csv
+validation/report/mesh_cloud_od.csv
+validation/report/normalization_params_registered.csv
+validation/figs_interactive/
 
 # macOS
 .DS_Store
